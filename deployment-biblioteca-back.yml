@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biblioteca-back-deployment
+spec:
+  selector:
+    matchLabels:
+      app: biblioteca-back
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: biblioteca-back
+    spec:
+      containers:
+        - name: biblioteca-back
+          image: biblioteca-back:0.0.1
+          ports:
+            - containerPort: 3000
+              name: bibliotecabport

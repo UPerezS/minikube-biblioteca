@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: biblioteca-back-service
+  labels:
+    app: biblioteca-back
+spec:
+  ports:
+    - name: biblioteca-back
+      port: 3000
+      nodePort: 30444
+  type: NodePort
+  selector:
+    app: biblioteca-back
