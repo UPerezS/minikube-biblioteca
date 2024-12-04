@@ -9,10 +9,12 @@ data:
     GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%';
     FLUSH PRIVILEGES;
 
+    ALTER USER 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'admin';
+
     USE BD_Sistema_BiBlioteca;
 
     -- Crear tabla libros
-    CREATE TABLE IF NOT EXISTS libro (
+    CREATE TABLE IF NOT EXISTS libros (
         cveLibro INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         tituloLibro VARCHAR(255) NOT NULL,
         autor VARCHAR(255) NOT NULL,
@@ -24,21 +26,21 @@ data:
     );
 
     -- Crear tabla usuarios
-    CREATE TABLE IF NOT EXISTS usuario (
-        cveUsuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        nombre VARCHAR(255) NOT NULL,
-        apellidoPa VARCHAR(255) NOT NULL,
-        apellidoMa VARCHAR(255) NOT NULL,
-        correo VARCHAR(255) NOT NULL,
-        contrasena VARCHAR(255) NOT NULL,
-        direccion VARCHAR(255) NOT NULL,
-        telefono INT(10) NOT NULL,
-        rol BOOLEAN,
-        estatus BOOLEAN
+    CREATE TABLE IF NOT EXISTS usuarios (
+      cveUsuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      nombre VARCHAR(255) NOT NULL,
+      apellido_pa VARCHAR(255) NOT NULL, 
+      apellido_ma VARCHAR(255) NOT NULL,
+      correo VARCHAR(255) NOT NULL UNIQUE,
+      contrasena VARCHAR(255) NOT NULL,
+      direccion VARCHAR(255) NOT NULL,
+      telefono VARCHAR(15) NOT NULL,
+      rol TINYINT(1),
+      estatus TINYINT(1)
     );
 
     -- Crear tabla historial_prestamo
-    CREATE TABLE IF NOT EXISTS historialPrestamo (
+    CREATE TABLE IF NOT EXISTS historialPrestamos (
         cveHistorial INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         cveUsuario INT NOT NULL,
         cveLibro INT NOT NULL,
